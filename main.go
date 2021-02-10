@@ -88,6 +88,9 @@ func mkdir_file(p string, useafplay bool, result string) {
 	}
     file.Write(([]byte)(output))
 	fmt.Printf("> .git/hooks/pre-push was written properly\n")
+
+	_ = os.Chmod(p + "/.git/hooks/pre-push", 0700)
+	fmt.Printf("> chmod 0700\n")
 }
 
 func gpshrInstall(install string) {
