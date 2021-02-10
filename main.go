@@ -85,7 +85,9 @@ func mkdir_file(p string, useafplay bool, result string) {
 		fmt.Println("! some error occured #005")
 	}
 	fmt.Printf("> .git/hooks/pre-push reinitialized\n")
+
 	defer file.Close()
+
 	// write
 	var output string
 	if useafplay == true {
@@ -93,6 +95,7 @@ func mkdir_file(p string, useafplay bool, result string) {
 	} else {
 		output = "#!/bin/bash\naplay " + absfile(result)
 	}
+	
 	file.Write(([]byte)(output))
 	fmt.Printf("> .git/hooks/pre-push was written properly\n")
 
