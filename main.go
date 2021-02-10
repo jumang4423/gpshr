@@ -27,7 +27,7 @@ func main() {
 	// parse flags
 	flag.Parse()
 
-	// command selector
+	// cmd selector
 	if *install == "" && *uninstall == "" && *sound == -1 {
 		welcome()
 	} else if *install != ""{
