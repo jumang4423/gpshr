@@ -91,9 +91,9 @@ func mkdir_file(p string, useafplay bool, result string) {
 	// write
 	var output string
 	if useafplay == true {
-		output = "#!/bin/bash\nafplay " + absfile(result)
+		output = "#!/bin/bash\nafplay " + absfile(result) + " &"
 	} else {
-		output = "#!/bin/bash\naplay " + absfile(result)
+		output = "#!/bin/bash\naplay " + absfile(result) + " &"
 	}
 	
 	file.Write(([]byte)(output))
