@@ -3,14 +3,33 @@
 # gpshr
 u can add sound when u git push
 
-## installation
+## usage
+
+- ```go run main.go``` 
+
+    see help
+
+- ```go run main.go -install foo``` 
+
+    install sound sctipts into foo directory
+
+- ```go run main.go -uninstall foo``` 
+
+    uninstall sound script from foo directory
+
+- ```go run main.go -import foo``` 
+
+    import sound from foo.mp3
+
+<!-- ## installation
 
 run this command below:
-```
+
 $ make | make install
-```
-make sure ``` gpshr ``` is installed locally
-## usage
+
+make sure ``` gpshr ``` is installed locally -->
+
+<!-- ## usage
 
 - ```gpshr``` 
 
@@ -26,4 +45,4 @@ make sure ``` gpshr ``` is installed locally
 
 - ```gpshr -import foo``` 
 
-    import sound from foo
+    import sound from foo -->

@@ -112,7 +112,8 @@ func gpshrInstall(install string) {
 
 	// sound selection
 	fmt.Println("? set ur mp3 file:\n")
-	res := dirsearch("./sounds")
+	// exe, _ := os.Executable()
+	res := dirsearch( "./sounds")
 
 	// show list
 	for i, v := range res {
@@ -165,7 +166,10 @@ func gpshrAddSound(imports string) {
 	// abs
 	original := absfile(imports)
 	_, file := filepath.Split(original)
-	cmd := absfile("./sounds/" + file)
+
+	// exe, _ := os.Executable()
+	
+	cmd := absfile( "/sounds/" + file)
 
 	from, err := os.Open(original)
 	if err != nil {
