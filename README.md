@@ -23,17 +23,17 @@ default, this script add path **both bash/zsh & fish**
 
     see help
 
-- ```gpshr -install foo``` 
+- ```gpshr -install .``` 
 
-    install sound sctipts into foo directory
+    install sound sctipts into current directory
 
-- ```gpshr -uninstall foo``` 
+- ```gpshr -uninstall .``` 
 
-    uninstall sound script from foo
+    uninstall sound script from current directory
 
-- ```gpshr -import foo``` 
+- ```gpshr -import foo.mp3``` 
 
-    import sound from foo<!-- 
+    import sound from foo.mp3<!-- 
 
 
 ## doesnt work? 
