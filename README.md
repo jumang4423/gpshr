@@ -1,3 +1,5 @@
+![README LOGO](_img/bak.png)
+
 # gpshr
 u can add sound when u git push
 
