@@ -17,8 +17,6 @@ $ ./install.sh
 ```
 default, this script add path **both bash/zsh & fish**
 
-doesnt work? try re-open the terminal
-
 ## usage
 
 - ```gpshr``` 
@@ -36,3 +34,22 @@ doesnt work? try re-open the terminal
 - ```gpshr -import foo``` 
 
     import sound from foo<!-- 
+
+
+## doesnt work? 
+try import them into each shell settings:
+### bash
+
+``` ~/.profile ```
+
+``` 
+export PATH="~/.gpshr" : "$PATH" 
+```
+
+### fish
+    
+``` ~/.config/fish/conf.d/gpshr.fish```
+
+``` 
+set PATH ~/.gpshr : "$PATH" 
+```

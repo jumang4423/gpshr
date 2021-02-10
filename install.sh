@@ -25,6 +25,6 @@ mkdir -p ~/.config/fish/conf.d
 touch ~/.config/fish/conf.d/gpshr.fish
 echo "set PATH ~/.gpshr" : '"$PATH"' >> ~/.config/fish/conf.d/gpshr.fish
 echo
-echo "! install done"
-echo "to uninstall this, delete ~/.gpshr"
+echo "! install done as, $ gpshr"
+echo "! to uninstall this, delete ~/.gpshr"
 echo
