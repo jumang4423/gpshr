@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"io"
 	"os"
+	"os/user"
 	"path/filepath"
 	"runtime"
 	"strconv"
@@ -14,6 +15,7 @@ import (
 var (
     Version  string = "v0.5"
     Revision string = "10/02/2021"
+	spath string = "/.gpshr/sounds"
 )
 
 func welcome() {
@@ -30,7 +32,9 @@ func welcome() {
 }
 
 func dirsearch(dir string) []string {
+	
 	files, err := ioutil.ReadDir(dir)
+	
 	if err != nil {
 		fmt.Println("some error occured #002")
 	}
@@ -113,7 +117,8 @@ func gpshrInstall(install string) {
 	// sound selection
 	fmt.Println("? set ur mp3 file:\n")
 	// exe, _ := os.Executable()
-	res := dirsearch( "./sounds")
+	usr, _ := user.Current()
+	res := dirsearch(usr.HomeDir + spath)
 
 	// show list
 	for i, v := range res {
@@ -169,7 +174,8 @@ func gpshrAddSound(imports string) {
 
 	// exe, _ := os.Executable()
 	
-	cmd := absfile( "/sounds/" + file)
+	usr, _ := user.Current()
+	cmd := usr.HomeDir + spath + "/" + file
 
 	from, err := os.Open(original)
 	if err != nil {

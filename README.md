@@ -1,35 +1,25 @@
 ![README LOGO](_img/bak.png)
 
 # gpshr
-u can add sound when u git push
+y not adding ugly sounds when u git push
 
-## usage
+## dependancies
 
-- ```go run main.go``` 
+    - golang
 
-    see help
-
-- ```go run main.go -install foo``` 
-
-    install sound sctipts into foo directory
-
-- ```go run main.go -uninstall foo``` 
-
-    uninstall sound script from foo directory
-
-- ```go run main.go -import foo``` 
-
-    import sound from foo.mp3
-
-<!-- ## installation
+## installation
 
 run this command below:
 
-$ make | make install
+```
+$ chmod +x install.sh
+$ ./install.sh
+```
+default, this script add path **both bash/zsh & fish**
 
-make sure ``` gpshr ``` is installed locally -->
+doesnt work? try re-open the terminal
 
-<!-- ## usage
+## usage
 
 - ```gpshr``` 
 
@@ -45,4 +35,4 @@ make sure ``` gpshr ``` is installed locally -->
 
 - ```gpshr -import foo``` 
 
-    import sound from foo -->
+    import sound from foo<!-- 
