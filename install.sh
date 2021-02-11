@@ -12,6 +12,7 @@ chmod +x ~/.gpshr/gpshr
 
 # move the binary
 cp gpshr ~/.gpshr
+rm gpshr
 cp -r sounds ~/.gpshr
 
 echo "> setting sh/bash/zsh path..."
