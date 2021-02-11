@@ -33,7 +33,7 @@ default, this script add path **both bash/zsh & fish**
 
 - ```gpshr -import foo.mp3``` 
 
-    import sound from foo.mp3<!-- 
+    import sound from foo.mp3
 
 
 ## doesnt work? 
