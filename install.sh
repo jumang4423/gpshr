@@ -25,7 +25,11 @@ echo "> setting fish path..."
 mkdir -p ~/.config/fish/conf.d
 touch ~/.config/fish/conf.d/gpshr.fish
 echo "set PATH ~/.gpshr" : '"$PATH"' >> ~/.config/fish/conf.d/gpshr.fish
+source ~/.config/fish/conf.d/gpshr.fish
+
 echo
-echo "! install done as, $ gpshr"
-echo "! to uninstall this, delete ~/.gpshr"
+GREEN='\033[0;32m'
+GREY='\033[0;36m'
+NC='\033[0m' # No Color
+echo -e "${GREEN}! INSTALLATION DONE${NC}"
 echo

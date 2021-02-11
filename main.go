@@ -16,16 +16,21 @@ var (
     Version  string = "v0.5"
     Revision string = "10/02/2021"
 	spath string = "/.gpshr/sounds"
+
+	colorReset string = "\033[0m"
+	colorRed string = "\033[31m"
+	colorGreen string = "\033[32m"
+	colorCyan string = "\033[36m"
 )
 
 func welcome() {
 	// say welcome when nothing entered except gtpsr command
-	fmt.Println("\nUsage: gpshr -command\n")
+	fmt.Println(string(colorGreen), "\n Usage: gpshr -command\n", string(colorReset))
 	fmt.Println("gpshr -install foo          install sound sctipts into <foo> directory")
 	fmt.Println("gpshr -uninstall foo        uninstall sound script from <foo>")
 	fmt.Println("gpshr -import foo           import sound from <foo>\n")
 
-	fmt.Println("All commands:\n")
+	fmt.Println(string(colorGreen), "All commands:\n", string(colorReset))
 	fmt.Println("	-install, -uninstall, -import\n")
 
 	fmt.Println("gpshr@" + Version + "\n")
@@ -36,7 +41,7 @@ func dirsearch(dir string) []string {
 	files, err := ioutil.ReadDir(dir)
 	
 	if err != nil {
-		fmt.Println("some error occured #002")
+		fmt.Println(string(colorRed), "some error occured #002", string(colorReset))
 	}
 
 	var paths []string
@@ -65,7 +70,7 @@ func absfile(path string) string {
 	// abs file path
 	p, err := filepath.Abs(path)
 	if err != nil {
-		fmt.Println("! some error occured #001, path is broke")
+		fmt.Println(string(colorRed), "! some error occured #001, path is broke", string(colorReset))
 	}
 	return p
 }
@@ -75,7 +80,7 @@ func mkdir_file(p string, useafplay bool, result string) {
 	// make directory
 	err := os.MkdirAll(p+"/.git/hooks", 0755)
 	if err != nil {
-		fmt.Println("! some error occured #003, git init first.")
+		fmt.Println(string(colorRed), "! some error occured #003, git init first.", string(colorReset))
 	}
 	fmt.Printf("> .git/hooks reinitialized\n")
 
@@ -104,6 +109,7 @@ func mkdir_file(p string, useafplay bool, result string) {
 	fmt.Printf("> .git/hooks/pre-push was written properly\n")
 
 	_ = os.Chmod(p+"/.git/hooks/pre-push", 0700)
+
 	fmt.Printf("> chmod 0700\n")
 }
 
@@ -115,7 +121,7 @@ func gpshrInstall(install string) {
 	fmt.Println("\n> make sure git init alrealy in the directory\n")
 
 	// sound selection
-	fmt.Println("? set ur mp3 file:\n")
+	fmt.Println(string(colorCyan), "? set ur mp3 file:\n", string(colorReset))
 	// exe, _ := os.Executable()
 	usr, _ := user.Current()
 	res := dirsearch(usr.HomeDir + spath)
@@ -149,9 +155,7 @@ func gpshrInstall(install string) {
 	// mkdir, write file
 	mkdir_file(p, useafplay, result)
 
-	fmt.Printf("\n! gpsher installation succeeded properly!\n")
-	fmt.Printf("! go to " + install + " then git push!\n")
-	fmt.Printf("! if u want to uninstall the script, run: gpshr -uninstall foo\n\n")
+	fmt.Println(string(colorGreen), "\n! gpsher installation succeeded properly!\n",)
 }
 
 func gpshrUninstall(uninstall string) {
@@ -164,7 +168,7 @@ func gpshrUninstall(uninstall string) {
 	os.Remove(p + "/.git/hooks/pre-push")
 	fmt.Printf("> .git/hooks/pre-push removed\n")
 
-	fmt.Printf("\n! gpsher uninstallation succeeded properly!\n\n")
+	fmt.Println(string(colorGreen), "\n! gpsher uninstallation succeeded properly!\n")
 }
 
 func gpshrAddSound(imports string) {
@@ -179,27 +183,26 @@ func gpshrAddSound(imports string) {
 
 	from, err := os.Open(original)
 	if err != nil {
-		fmt.Println("! some error occured #006, the file is missing")
+		fmt.Println(string(colorRed),"! some error occured #006, the file is missing", string(colorReset))
 	}
 	defer from.Close()
 	fmt.Printf("> opened original file\n")
 
 	to, err := os.OpenFile(cmd, os.O_RDWR|os.O_CREATE, 0666)
 	if err != nil {
-		fmt.Println("! some error occured #007, permission denied")
+		fmt.Println(string(colorRed),"! some error occured #007, permission denied", string(colorReset))
 	}
 	defer to.Close()
 
 	fmt.Printf("> copying...\n")
 	_, err = io.Copy(to, from)
 	if err != nil {
-		fmt.Println("! some error occured #008, permission denied")
+		fmt.Println(string(colorRed),"! some error occured #008, permission denied", string(colorReset))
 	}
 	fmt.Printf("> installing...\n")
 
 
-	fmt.Printf("\n! import succeeded properly!\n")
-	fmt.Printf("! if u want to install the script, run: gpshr -install foo\n\n")
+	fmt.Println(string(colorGreen), "\n! import succeeded properly!\n")
 }
 
 func main() {
