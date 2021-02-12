@@ -74,7 +74,7 @@ set PATH ~/.gpshr : "$PATH"
 $ chmod +x install.sh
 $ ./install.sh
 ```
- **bash, zsh & fish**にgpshrのパスが通されます。
+ **bash, zsh & fish**にgpshrのパスが通されます
 
 ## 使いかた
 
