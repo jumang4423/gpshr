@@ -31,5 +31,5 @@ echo
 GREEN='\033[0;32m'
 GREY='\033[0;36m'
 NC='\033[0m' # No Color
-echo -e "${GREEN}! INSTALLATION DONE${NC}"
+echo -e "${GREEN}! INSTALLATION DONE!${NC}"
 echo
