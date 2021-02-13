@@ -1,5 +1,6 @@
 package main
 
+// import pkg
 import (
 	"flag"
 	"fmt"
@@ -12,6 +13,7 @@ import (
 	"strconv"
 )
 
+// variables
 var (
 	Version  string = "v0.8"
 	Revision string = "13/02/2021"
