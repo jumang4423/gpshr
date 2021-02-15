@@ -11,6 +11,8 @@ y not adding ugly sounds when u git push
 ## dependancies
 
     - golang
+    - afplay (for darwin like OSX)
+    - aplay (for linux OS)
 
 ## installation
 
@@ -65,6 +67,8 @@ set PATH ~/.gpshr : "$PATH"
 ## 依存パッケージ
 
     - golang
+    - afplay (darwinおよびOSXを使ってる人はこれ)
+    - aplay (linuxを使ってる人はこれ)
 
 ## インストール方法
 
@@ -74,7 +78,8 @@ set PATH ~/.gpshr : "$PATH"
 $ chmod +x install.sh
 $ ./install.sh
 ```
- **bash, zsh & fish**にgpshrのパスが通されます
+**bash, zsh & fish**にgpshrのパスが通されます
+実際にスクリプトをインストールして、音を鳴らしてみましょう！！！楽しみ！！！
 
 ## 使いかた
 
@@ -85,8 +90,7 @@ $ ./install.sh
 - ```gpshr -install フォルダー``` 
 
     指定したフォルダーにgpshrがインストールされます
-    git initされているフォルダーを指定してください
-    
+    git initされているフォルダーを指定してください!
 
 - ```gpshr -uninstall フォルダー``` 
 
