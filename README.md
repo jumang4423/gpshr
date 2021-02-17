@@ -2,7 +2,7 @@
 <h1 align="center"> <a href="#english">english</a> |<a href="#japanese">日本語</a></h1>
 
 ![README LOGO](_img/bak.png)
-# gpshr
+# gpshr | git pusher
 
 y not adding ugly sounds when u git push
 
