@@ -31,12 +31,11 @@ func welcome() {
 	fmt.Println("\n> gpshr@" + Version)
 
 	fmt.Println(string(colorGreen), "\n Usage: gpshr -command\n", string(colorReset))
-	fmt.Println("	gpshr -install foo          install sound sctipts into <foo> directory")
-	fmt.Println("	gpshr -uninstall foo        uninstall sound script from <foo>")
-	fmt.Println("	gpshr -import foo           import sound from <foo>\n")
+	fmt.Println("	gpshr -(un)install . -hooks foo     select hooks (push or commit) then (un)install sound sctipts into <foo> directory")
+	fmt.Println("	gpshr -import foo                   import sound from <foo>\n")
 
 	fmt.Println(string(colorGreen), "All commands:\n", string(colorReset))
-	fmt.Println("	-install, -uninstall, -import\n")
+	fmt.Println("	-install, -uninstall, -import -hooks\n")
 
 }
 
@@ -79,7 +78,7 @@ func absfile(path string) string {
 	return p
 }
 
-func mkdir_file(p string, useafplay bool, result string) {
+func mkdir_file(p string, useafplay bool, result string, hooks string) {
 
 	// make directory
 	err := os.MkdirAll(p+"/.git/hooks", 0755)
@@ -89,15 +88,15 @@ func mkdir_file(p string, useafplay bool, result string) {
 	fmt.Printf("> .git/hooks reinitialized\n")
 
 	// remove pre-push
-	os.Remove(p + "/.git/hooks/pre-push")
-	fmt.Printf("> .git/hooks/pre-push removed\n")
+	os.Remove(p + "/.git/hooks/pre-" + hooks)
+	fmt.Printf("> .git/hooks/pre-" + hooks + " removed\n")
 
 	// create file
-	file, err := os.Create(p + "/.git/hooks/pre-push")
+	file, err := os.Create(p + "/.git/hooks/pre-" + hooks)
 	if err != nil {
-		fmt.Println(string(colorRed), "! some error occured #005, cannot create pre-push scripts", string(colorReset))
+		fmt.Println(string(colorRed), "! some error occured #005, cannot create pre-" + hooks +" scripts", string(colorReset))
 	}
-	fmt.Printf("> .git/hooks/pre-push reinitialized\n")
+	fmt.Printf("> .git/hooks/pre-" + hooks + " reinitialized\n")
 
 	defer file.Close()
 
@@ -112,12 +111,12 @@ func mkdir_file(p string, useafplay bool, result string) {
 	file.Write(([]byte)(output))
 	fmt.Printf("> .git/hooks/pre-push done\n")
 
-	_ = os.Chmod(p+"/.git/hooks/pre-push", 0700)
+	_ = os.Chmod(p+"/.git/hooks/pre-" + hooks, 0700)
 
 	fmt.Printf("> chmod 0700\n")
 }
 
-func gpshrInstall(install string) {
+func gpshrInstall(install string, hooks string) {
 	// abs file path
 	p := absfile(install)
 	// let check usr path right or not
@@ -160,20 +159,20 @@ func gpshrInstall(install string) {
 	useafplay := isosx()
 
 	// mkdir, write file
-	mkdir_file(p, useafplay, result)
+	mkdir_file(p, useafplay, result, hooks)
 
 	fmt.Println(string(colorGreen), "\n! gpsher installation succeeded\n")
 }
 
-func gpshrUninstall(uninstall string) {
+func gpshrUninstall(uninstall string, hooks string) {
 	// abs file path
 	p := absfile(uninstall)
 	// let check usr path right or not
 	fmt.Printf("\n> gpsher will uninstall from " + p)
 	fmt.Println("\n> make sure git init alrealy in the directory\n")
 
-	os.Remove(p + "/.git/hooks/pre-push")
-	fmt.Printf("> .git/hooks/pre-push removed\n")
+	os.Remove(p + "/.git/hooks/pre-" + hooks)
+	fmt.Printf("> .git/hooks/pre-" + hooks + " removed\n")
 
 	fmt.Println(string(colorGreen), "\n! gpsher uninstallation succeeded\n")
 }
@@ -214,6 +213,7 @@ func gpshrAddSound(imports string) {
 func main() {
 
 	// init flags
+	hooks := flag.String("hooks", "", "select hooks (push or commit)")
 	install := flag.String("install", "", "install sound sctipts")
 	uninstall := flag.String("uninstall", "", "uninstall sound sctipts")
 	imports := flag.String("import", "", "import sound")
@@ -222,13 +222,18 @@ func main() {
 	flag.Parse()
 
 	// cmd selector
-	if *install == "" && *uninstall == "" && *imports == "" {
+	if *install == "" && *uninstall == "" && *imports == "" && *hooks == "" {
 		welcome()
 	} else if *install != "" {
-		gpshrInstall(*install)
+		
+		if *hooks == "commit" || *hooks == "push" {
+			 gpshrInstall(*install, *hooks) 
+			} else { 
+				fmt.Println(string(colorRed), "! some error occured #012, bad hook parameters", string(colorReset))
+			}
 
 	} else if *uninstall != "" {
-		gpshrUninstall(*uninstall)
+		gpshrUninstall(*uninstall, *hooks)
 	} else if *imports != "" {
 		gpshrAddSound(*imports)
 	}
