@@ -30,17 +30,14 @@ default, this script add path **both bash/zsh & fish**
 
     see help
 
-- ```gpshr -install .``` 
+- ```gpshr -(un)install [directory] -hooks [hooks]``` 
 
-    install sound sctipts into current directory
+    select [hooks] hooks (push or commit) then (un)install sound sctipts into [directory]
 
-- ```gpshr -uninstall .``` 
 
-    uninstall sound script from current directory
+- ```gpshr -import [music file]``` 
 
-- ```gpshr -import foo.mp3``` 
-
-    import sound from foo.mp3
+    import sound from [music file]
 
 
 ## doesnt work? 
@@ -87,18 +84,13 @@ $ ./install.sh
 
     コマンドのヘルプが表示されます
 
-- ```gpshr -install フォルダー``` 
+- ```gpshr -(un)install [ディレクトリ] -hooks [フックス]``` 
 
-    指定したフォルダーにgpshrがインストールされます
-    git initされているフォルダーを指定してください!
+    [ディレクトリ]で、[フックス]（pushかcommitを入れてください）された時に音がなる様に設定します。
 
-- ```gpshr -uninstall フォルダー``` 
+- ```gpshr -import [音楽ファイル]``` 
 
-    指定したフォルダーからgpshrがアンインストールされます
-
-- ```gpshr -import foo.mp3``` 
-
-    ~/.gpshr/sounds　に音声ファイルをインポートします
+    ~/.gpshr/sounds　に[音楽ファイル]をインポートします
 
 
 ## 動きません！
