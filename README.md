@@ -1,4 +1,3 @@
-
 <h1 align="center"> <a href="#english">english</a> |<a href="#japanese">日本語</a></h1>
 
 ![README LOGO](_img/bak.png)
