@@ -31,7 +31,7 @@ default, this script add path **both bash/zsh & fish**
 
 - ```gpshr -(un)install [directory] -hooks [hooks]``` 
 
-    select [hooks] hooks (push or commit) then (un)install sound sctipts into [directory]
+    select [hooks] hooks (push, commit and checkout) then (un)install sound sctipts into [directory]
 
 
 - ```gpshr -import [music file]``` 
@@ -85,7 +85,7 @@ $ ./install.sh
 
 - ```gpshr -(un)install [ディレクトリ] -hooks [フックス]``` 
 
-    [ディレクトリ]で、[フックス]（pushかcommitを入れてください）された時に音がなる様に設定します。
+    [ディレクトリ]で、[フックス]（push, commitまたはcheckoutを入れてください）された時に音がなる様に設定します。
 
 - ```gpshr -import [音楽ファイル]``` 
 
