@@ -7,11 +7,21 @@ y not adding ugly sounds when u git push
 
 <h1 align="left" id="english"> 🇺🇸english<h1>
 
-## dependancies
+## dependancies for build
 
     - golang
     - afplay (for darwin like OSX)
     - aplay (for linux OS)
+
+## development with a docker
+```bash
+# build go image
+sudo docker-compose build
+# launch image on background process
+sudo docker-compose up -d
+# exec go command using docker envinroment
+sudo docker-compose exec gpshr go run main.go
+```
 
 ## installation
 
@@ -57,24 +67,24 @@ export PATH="~/.gpshr" : "$PATH"
 set PATH ~/.gpshr : "$PATH" 
 ```
 
-## development with a docker
-```bash
-# build go image
-sudo docker-compose build
-# launch image on background process
-sudo docker-compose up -d
-# exec go command using docker envinroment
-sudo docker-compose exec gpshr go run main.go
-```
-
 
 <h1 align="left" id="japanese"> 🇯🇵日本語<h1>
 
-## 依存パッケージ
+## ビルドのための依存パッケージ
 
     - golang
     - afplay (darwinおよびOSXを使ってる人はこれ)
     - aplay (linuxを使ってる人はこれ)
+
+## dockerをつかった開発環境
+```bash
+# イメージをビルド
+sudo docker-compose build
+# バックグラウンドでイメージを立ち上げる
+sudo docker-compose up -d
+# ドッカー環境でgoを使ってソフトを動かす
+sudo docker-compose exec gpshr go run main.go
+```
 
 ## インストール方法
 
@@ -118,14 +128,4 @@ export PATH="~/.gpshr" : "$PATH"
 
 ``` 
 set PATH ~/.gpshr : "$PATH" 
-```
-
-## dockerをつかった開発環境
-```bash
-# イメージをビルド
-sudo docker-compose build
-# バックグラウンドでイメージを立ち上げる
-sudo docker-compose up -d
-# ドッカー環境でgoを使ってソフトを動かす
-sudo docker-compose exec gpshr go run main.go
 ```
