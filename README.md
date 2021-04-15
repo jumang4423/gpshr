@@ -57,6 +57,16 @@ export PATH="~/.gpshr" : "$PATH"
 set PATH ~/.gpshr : "$PATH" 
 ```
 
+## development with a docker
+```bash
+# build go image
+sudo docker-compose build
+# launch image on background process
+sudo docker-compose up -d
+# exec go command using docker envinroment
+sudo docker-compose exec gpshr go run main.go
+```
+
 
 <h1 align="left" id="japanese"> 🇯🇵日本語<h1>
 
@@ -108,4 +118,14 @@ export PATH="~/.gpshr" : "$PATH"
 
 ``` 
 set PATH ~/.gpshr : "$PATH" 
+```
+
+## dockerをつかった開発環境
+```bash
+# イメージをビルド
+sudo docker-compose build
+# バックグラウンドでイメージを立ち上げる
+sudo docker-compose up -d
+# ドッカー環境でgoを使ってソフトを動かす
+sudo docker-compose exec gpshr go run main.go
 ```
