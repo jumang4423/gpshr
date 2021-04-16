@@ -11,6 +11,8 @@ import (
 	"path/filepath"
 	"runtime"
 	"strconv"
+
+	"./functions"
 )
 
 // variables
@@ -24,20 +26,6 @@ var (
 	colorGreen string = "\033[32m"
 	colorCyan  string = "\033[36m"
 )
-
-func welcome() {
-	// say welcome when nothing entered except gtpsr command
-
-	fmt.Println("\n> gpshr@" + Version)
-
-	fmt.Println(string(colorGreen), "\n Usage: gpshr -command\n", string(colorReset))
-	fmt.Println("	gpshr -(un)install [directory] -hooks [hooks]   select [hooks] hooks (push, commit and checkout) then (un)install sound sctipts into [directory]")
-	fmt.Println("	gpshr -import foo                               import sound from <foo>\n")
-
-	fmt.Println(string(colorGreen), "All commands:\n", string(colorReset))
-	fmt.Println("	-install, -uninstall, -import -hooks\n")
-
-}
 
 func dirsearch(dir string) []string {
 
@@ -87,61 +75,61 @@ func mkdir_file(p string, useafplay bool, result string, hooks string) {
 	}
 	fmt.Printf("> .git/hooks reinitialized\n")
 
-    if(hooks != "checkout") {
+	if hooks != "checkout" {
 
-	    // remove pre-push
-	    os.Remove(p + "/.git/hooks/pre-" + hooks)
-	    fmt.Printf("> .git/hooks/pre-" + hooks + " removed\n")
-    
-	    // create file
-	    file, err := os.Create(p + "/.git/hooks/pre-" + hooks)
-	    if err != nil {
-		    fmt.Println(string(colorRed), "! some error occured #005, cannot create pre-" + hooks +" scripts", string(colorReset))
-	    }
-	    fmt.Printf("> .git/hooks/pre-" + hooks + " reinitialized\n")
+		// remove pre-push
+		os.Remove(p + "/.git/hooks/pre-" + hooks)
+		fmt.Printf("> .git/hooks/pre-" + hooks + " removed\n")
 
-	    defer file.Close()
+		// create file
+		file, err := os.Create(p + "/.git/hooks/pre-" + hooks)
+		if err != nil {
+			fmt.Println(string(colorRed), "! some error occured #005, cannot create pre-"+hooks+" scripts", string(colorReset))
+		}
+		fmt.Printf("> .git/hooks/pre-" + hooks + " reinitialized\n")
 
-	    // write
-	    var output string
-	    if useafplay == true {
-		    output = "#!/bin/bash\nafplay " + absfile(result) + " &"
-	    } else {
-		    output = "#!/bin/bash\naplay " + absfile(result) + " &"
-	    }
+		defer file.Close()
 
-	    file.Write(([]byte)(output))
-	    fmt.Printf("> .git/hooks/pre done\n")
+		// write
+		var output string
+		if useafplay == true {
+			output = "#!/bin/bash\nafplay " + absfile(result) + " &"
+		} else {
+			output = "#!/bin/bash\naplay " + absfile(result) + " &"
+		}
 
-	    _ = os.Chmod(p+"/.git/hooks/pre-" + hooks, 0700)
-    } else {
-    
-	    // remove post-push
-        os.Remove(p + "/.git/hooks/post-" + hooks)
-	    fmt.Printf("> .git/hooks/post-" + hooks + " removed\n")
-    
-	    // create file
-	    file, err := os.Create(p + "/.git/hooks/post-" + hooks)
-	    if err != nil {
-		    fmt.Println(string(colorRed), "! some error occured #005, cannot create post-" + hooks +" scripts", string(colorReset))
-	    }
-	    fmt.Printf("> .git/hooks/post-" + hooks + " reinitialized\n")
+		file.Write(([]byte)(output))
+		fmt.Printf("> .git/hooks/pre done\n")
 
-	    defer file.Close()
+		_ = os.Chmod(p+"/.git/hooks/pre-"+hooks, 0700)
+	} else {
 
-	    // write
-	    var output string
-	    if useafplay == true {
-		    output = "#!/bin/bash\nafplay " + absfile(result) + " &"
-	    } else {
-		    output = "#!/bin/bash\naplay " + absfile(result) + " &"
-	    }
+		// remove post-push
+		os.Remove(p + "/.git/hooks/post-" + hooks)
+		fmt.Printf("> .git/hooks/post-" + hooks + " removed\n")
 
-	    file.Write(([]byte)(output))
-	    fmt.Printf("> .git/hooks/post done\n")
+		// create file
+		file, err := os.Create(p + "/.git/hooks/post-" + hooks)
+		if err != nil {
+			fmt.Println(string(colorRed), "! some error occured #005, cannot create post-"+hooks+" scripts", string(colorReset))
+		}
+		fmt.Printf("> .git/hooks/post-" + hooks + " reinitialized\n")
 
-	    _ = os.Chmod(p+"/.git/hooks/post-" + hooks, 0700)
-    }
+		defer file.Close()
+
+		// write
+		var output string
+		if useafplay == true {
+			output = "#!/bin/bash\nafplay " + absfile(result) + " &"
+		} else {
+			output = "#!/bin/bash\naplay " + absfile(result) + " &"
+		}
+
+		file.Write(([]byte)(output))
+		fmt.Printf("> .git/hooks/post done\n")
+
+		_ = os.Chmod(p+"/.git/hooks/post-"+hooks, 0700)
+	}
 	fmt.Printf("> chmod 0700\n")
 }
 
@@ -200,14 +188,14 @@ func gpshrUninstall(uninstall string, hooks string) {
 	fmt.Printf("\n> gpsher will uninstall from " + p)
 	fmt.Println("\n> make sure git init alrealy in the directory\n")
 
-	if(hooks != "checkout") {
-        os.Remove(p + "/.git/hooks/pre-" + hooks)
-	    fmt.Printf("> .git/hooks/pre-" + hooks + " removed\n")
-    } else {
-        os.Remove(p + "/.git/hooks/post-" + hooks)
-        fmt.Printf("> .git/hooks/post-" + hooks + " removed\n")
+	if hooks != "checkout" {
+		os.Remove(p + "/.git/hooks/pre-" + hooks)
+		fmt.Printf("> .git/hooks/pre-" + hooks + " removed\n")
+	} else {
+		os.Remove(p + "/.git/hooks/post-" + hooks)
+		fmt.Printf("> .git/hooks/post-" + hooks + " removed\n")
 
-    }
+	}
 	fmt.Println(string(colorGreen), "\n! gpsher uninstallation succeeded\n")
 }
 
@@ -257,14 +245,14 @@ func main() {
 
 	// cmd selector
 	if *install == "" && *uninstall == "" && *imports == "" && *hooks == "" {
-		welcome()
+		functions.Welcome()
 	} else if *install != "" {
-		
+
 		if *hooks == "commit" || *hooks == "push" || *hooks == "checkout" {
-			 gpshrInstall(*install, *hooks) 
-			} else { 
-				fmt.Println(string(colorRed), "! some error occured #012, bad hook parameters", string(colorReset))
-			}
+			gpshrInstall(*install, *hooks)
+		} else {
+			fmt.Println(string(colorRed), "! some error occured #012, bad hook parameters", string(colorReset))
+		}
 
 	} else if *uninstall != "" {
 		gpshrUninstall(*uninstall, *hooks)
