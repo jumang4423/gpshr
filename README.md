@@ -9,7 +9,7 @@ y not adding ugly sounds when u git push
 
 ## dependancies for build
 
-    - golang
+    - go
     - afplay (for darwin like OSX) or aplay (for linux OS)
 
 ## development with a docker
@@ -71,7 +71,7 @@ set PATH ~/.gpshr : "$PATH"
 
 ## ビルドのための依存パッケージ
 
-    - golang
+    - go
     - afplay (darwinおよびOSXを使ってる人はこれ) or aplay (linuxを使ってる人はこれ)
 
 ## dockerをつかった開発環境
